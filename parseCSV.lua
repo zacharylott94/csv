@@ -20,31 +20,17 @@ local split = function(str, char)
   return subs
 end
 
+local function parse(file)
+  local tab = {}
+  --separate line into itemname,quantity substrings
+  for line in file:lines() do
+    table.insert(tab, split(line, ","))
+  end
+  return tab
 
--- local function parseItem (str)
---   local item = {}
---   item.name = string.match(str, "(%w+:%w+)")
---   item.count = string.match(str, "%d+")
---   return item
--- end
+end
 
--- local function parse(line)
---   local trade = {}
---   --separate line into itemname,quantity substrings
---   for each in string.gmatch(line, "(%w+:%w+,%d+)") do
---     -- parse each substring into an Item table
---     local item = parseItem(each)
---     table.insert(trade, item)
---   end
---   return trade
-
--- end
-
-
--- local tradelist = {}
--- for line in tradeFile:lines() do
---   table.insert(tradelist, parse(line))
--- end
--- return tradelist
-
-return split
+return {
+  split = split,
+  parse = parse
+}

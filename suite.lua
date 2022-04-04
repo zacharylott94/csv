@@ -15,10 +15,10 @@ local function dump(o)
   end
 end
 
-local suite = Unit.suite("split",{
+local split = Unit.suite("split",{
 
   Unit.test("will split a string", function() 
-    local split = require("parseCSV")
+    local split = require("parseCSV").split
     local actual = split("1,2,3", ",")
     local expected = {"1","2","3"}
     return Unit.deepEquals(expected, actual), dump(actual), dump(expected) 
@@ -26,4 +26,21 @@ local suite = Unit.suite("split",{
 
 })
 
-Unit.report(suite)
+local parse = Unit.suite("parse", {
+  Unit.test("returns a table of tables", function() 
+    local parse = require("parseCSV").parse
+    local file = io.open("test.csv", "r")
+    local actual = parse(file)
+    local expected = {
+      {"1","2","3"},
+      {"a","b","c"}
+    }
+    local first = Unit.deepEquals(actual[1], expected[1])
+    local second = Unit.deepEquals(actual[2], expected[2])
+    return (first and second), dump(actual), dump(expected)
+  
+  end)
+})
+
+Unit.report(split)
+Unit.report(parse)
