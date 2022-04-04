@@ -1,4 +1,4 @@
-package = "parseCSV"
+package = "csv"
 version = "dev-1"
 source = {
    url = "*** please add URL for source tarball, zip or repository here ***"
@@ -10,6 +10,6 @@ description = {
 build = {
    type = "builtin",
    modules = {
-      parseCSV = "parseCSV.portable.lua"
+      csv = "csv.portable.lua"
    }
 }

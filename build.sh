@@ -1,0 +1,1 @@
+amalg.lua -o ./csv.portable.lua -s ./csv.lua  && luarocks --local build
