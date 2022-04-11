@@ -51,6 +51,23 @@ local parseh = Unit.suite("parseh", {
   end)
 })
 
+local parsedict = Unit.suite("parse.dict", {
+  Unit.test("returns a dictionary", function()
+  local expected = {
+    key = "value",
+    item = "itemName"
+  }
+  local parsedict = require("csv").parsedict
+  local file = io.open("dict.csv", "r")
+
+  local actual = parsedict(file) 
+  return {
+    Unit.deepEquals(actual,expected)
+  }
+  end)
+})
+
 Unit.report(split)
 Unit.report(parse)
 Unit.report(parseh)
+Unit.report(parsedict)

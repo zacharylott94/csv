@@ -50,8 +50,19 @@ local function parseh(file)
 
 end
 
+--parses, treating each line as a key and value pair in a dictionary
+local function parsedict(file)
+  local dict = {}
+  for line in file:lines() do
+    local values = split(line, ",")
+    dict[values[1]] = values[2]
+  end
+  return dict
+end
+
 return {
   split = split, --expose only for testing
   parse = parse,
-  parseh = parseh
+  parseh = parseh,
+  parsedict = parsedict
 }
